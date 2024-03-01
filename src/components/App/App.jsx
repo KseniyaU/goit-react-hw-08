@@ -2,7 +2,7 @@ import '../App/App.module.css'
 import { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Loader } from '../Loader/Loader';
-
+import { NavBar } from '../NavBar/NavBar';
 
 
 
@@ -22,6 +22,7 @@ const ContactsPage = lazy(()=> import('../../pages/Contacts'));
 function App() {
   return (
     <>
+      <NavBar/>
       <Suspense fallback={ <Loader/>}>
         <Routes>
           <Route path='/' element={<HomePage />}></Route>

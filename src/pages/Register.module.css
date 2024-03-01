@@ -1,0 +1,20 @@
+.containerFormReg {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000000;
+  margin-bottom: 10px;
+  width: 300px;
+  padding: 10px;
+  gap: 10px;
+}
+.elemFormReg {
+  display: flex;
+  flex-direction: column;
+}
+.errorReg {
+  font-size: 10px;
+  color: #d24221;
+}
+.fildFormReg {
+  height: 25px;
+}
