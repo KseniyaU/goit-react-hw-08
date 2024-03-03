@@ -2,11 +2,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useId } from "react"; 
 import css from '../pages/Register.module.css'
+import { logIn } from "../redux/auth/operations";
+import { useDispatch } from "react-redux";
+
 
 export default function Register() {
     const emailId = useId();
     const passwordId = useId();
     const nameId = useId();
+    const dispatch = useDispatch();
+      
 
     const userSchema = Yup.object().shape(
         {
@@ -33,9 +38,15 @@ export default function Register() {
             }}
                 validationSchema={userSchema}
                 onSubmit={(values, actions) => {
-                    actions.resetForm()
-                    onAddUserLogin({id: Date.now(), ...values})
-                }}
+                dispatch(logIn({
+                    email: values.email,
+                    password: values.password,
+                }))
+                    .unwrap()
+                    .then(() => { console.log('Вход выполнен успешно'); })
+                    .catch(() => { console.log('Ошибка входа'); });
+                actions.resetForm();
+            }}
             >
                 <Form className={css.containerFormReg}>
                     <div className={css.elemFormReg}>

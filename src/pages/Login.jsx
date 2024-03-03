@@ -2,11 +2,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useId } from "react";
 import css from '../pages/Login.module.css'
+import { useDispatch } from "react-redux";
+import { logIn } from "../redux/auth/operations";
 
 export default function Login() {
     const emailId = useId();
     const passwordId = useId();
+    const dispatch = useDispatch();
 
+
+//  const onAddUserLogin = newUser => {
+//     dispatch(addContact(newUser));
+//   }
     const userSchema = Yup.object().shape(
         {
             email: Yup.string()
@@ -26,10 +33,16 @@ export default function Login() {
                     password: ''
             }}
                 validationSchema={userSchema}
-                onSubmit={(values, actions) => {
-                    actions.resetForm()
-                    onAddUserLogin({id: Date.now(), ...values})
-                }}
+               onSubmit={(values, actions) => {
+                dispatch(logIn({
+                    email: values.email,
+                    password: values.password,
+                }))
+                    .unwrap()
+                    .then(() => { console.log('Вход выполнен успешно'); })
+                    .catch(() => { console.log('Ошибка входа'); });
+                actions.resetForm();
+            }}
             >
                 <Form className={css.containerFormLogin}>
                     <div className={css.elemFormLogin}>

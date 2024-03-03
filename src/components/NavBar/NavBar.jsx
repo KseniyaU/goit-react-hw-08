@@ -1,15 +1,16 @@
-import { NavLink } from "react-router-dom"
-import css from '../NavBar/NavBar.module.css'
+import { NavLink } from "react-router-dom";
+import { Navigation } from '../Navigation/Navigation';
+import { AuthNav } from "../AuthNav/AuthNav";
+import { UserMenu } from "../UserMenu/UserMenu";
+import { useAuth } from '../../hooks';
+import css from '../NavBar/NavBar.module.css';
 
 export const NavBar = () => {
+    const {isLoggedIn } = useAuth();
     return (
-        <div className={ css.containerNav}>
-            <nav className={css.nav}>
-                <NavLink to='/'>Home</NavLink>
-                <NavLink to='/contacts'>Contacts</NavLink>
-                <NavLink to='/register'>Register</NavLink>
-                <NavLink to='/login'>Log In</NavLink>
-            </nav>
-        </div>
+        <header className={css.containerNav}>
+            <Navigation />
+            { isLoggedIn ? <UserMenu/> : <AuthNav/>}
+       </header>
     )
 }
