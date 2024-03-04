@@ -1,8 +1,13 @@
 import '../App/App.module.css'
-import { Suspense, lazy } from 'react'
+import { lazy, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Loader } from '../Loader/Loader';
-import { NavBar } from '../NavBar/NavBar';
+import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
+import { RegistrictedRoute } from '../RegistrictedRoute/RegistrictedRoute';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../../hooks';
+import { refreshUser } from '../../redux/auth/operations';
+import { Toaster } from 'react-hot-toast';
+import {Layout} from '../Layout/Layout'
 
 
 
@@ -12,6 +17,8 @@ import { NavBar } from '../NavBar/NavBar';
 //npm install @reduxjs/toolkit react-redux
 //npm install react-router-dom
 //npm install react-loader-spinner
+// npm install react-helmet-async
+// npm install react-hot-toast
 
 
 const HomePage = lazy(() => import('../../pages/Home'));
@@ -20,17 +27,38 @@ const LoginPage = lazy(() => import('../../pages/Login'));
 const ContactsPage = lazy(()=> import('../../pages/Contacts'));
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch])
+  return isRefreshing ? (<b>Refreshing user...</b>):(
     <>
-      <NavBar/>
-      <Suspense fallback={ <Loader/>}>
+      {/* <NavBar/> */}
+      {/* <Suspense fallback={ <Loader/>}> */}
         <Routes>
-          <Route path='/' element={<HomePage />}></Route>
-          <Route path='/register' element={<RegisterPage />}></Route>
-          <Route path='/login' element={<LoginPage />}></Route>
-          <Route path='/contacts' element={ <ContactsPage/>}></Route>
-        </Routes>
-      </Suspense>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path='/register' element={
+            <RegistrictedRoute redirectTo='contacts' component={<RegisterPage />}/>}></Route>
+
+          <Route path='/login' element={
+            <RegistrictedRoute redirectTo='/contacts' component={<LoginPage />}/>
+            }></Route>
+          
+          <Route path='/contacts' element={ 
+          <PrivateRoute redirectTo='/login'
+          component={<ContactsPage/>}/>
+          }></Route>
+
+        </Route>
+        
+
+
+          
+      </Routes>
+      <Toaster/>
+      {/* </Suspense> */}
     </>
 )
 
