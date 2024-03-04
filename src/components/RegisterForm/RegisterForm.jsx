@@ -66,7 +66,7 @@ export const RegisterForm = () => {
                         <Field type='password' name="password" id={passwordId} className={css.fildFormReg}></Field>
                         <ErrorMessage name="password" component="span" className={css.errorReg}></ErrorMessage>
                     </div>
-                    <button type="submit">Log In</button>
+                    <button type="submit">Register</button>
                 </Form>
             </Formik>
         </>
