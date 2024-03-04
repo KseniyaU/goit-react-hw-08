@@ -46,7 +46,7 @@ export const RegisterForm = () => {
                 }))
                     .unwrap()
                     .then(() => { console.log('Регістрація виконана успішно'); })
-                    .catch(() => { console.log('Помилка решістрації'); });
+                    .catch(() => { console.log('Помилка регістрації'); });
                 actions.resetForm();
             }}
             >
