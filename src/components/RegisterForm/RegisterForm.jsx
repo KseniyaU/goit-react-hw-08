@@ -45,8 +45,8 @@ export const RegisterForm = () => {
                     password: values.password,
                 }))
                     .unwrap()
-                    .then(() => { console.log('Вход выполнен успешно'); })
-                    .catch(() => { console.log('Ошибка входа'); });
+                    .then(() => { console.log('Регістрація виконана успішно'); })
+                    .catch(() => { console.log('Помилка решістрації'); });
                 actions.resetForm();
             }}
             >

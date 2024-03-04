@@ -37,8 +37,8 @@ export const LoginForm = () => {
                     password: values.password,
                 }))
                     .unwrap()
-                    .then(() => { console.log('Вход выполнен успешно'); })
-                    .catch(() => { console.log('Ошибка входа'); });
+                    .then(() => { console.log('Вхід виконано успішно'); })
+                    .catch(() => { console.log('Помилка входу'); });
                 actions.resetForm();
             }}
             >
