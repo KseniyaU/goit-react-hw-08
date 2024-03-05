@@ -6,11 +6,12 @@ import { useAuth } from '../../hooks';
 import css from '../NavBar/NavBar.module.css';
 
 export const NavBar = () => {
-    const {isLoggedIn } = useAuth();
+    const { isLoggedIn } = useAuth();
+    // console.log(isLoggedIn);
     return (
         <header className={css.containerNav}>
             <Navigation />
-            { !isLoggedIn ? <UserMenu/> : <AuthNav/>}
+            { isLoggedIn ? <UserMenu/> : <AuthNav/>}
        </header>
     )
 }

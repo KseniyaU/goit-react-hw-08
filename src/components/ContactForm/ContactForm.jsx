@@ -38,6 +38,7 @@ export const ContactForm = () => {
             }}
             validationSchema={userSchema}
             onSubmit={(values, actions) => {
+                
                 actions.resetForm()
                 onAdd({id: Date.now(), ...values})
             }}

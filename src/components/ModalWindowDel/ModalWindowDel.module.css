@@ -1,0 +1,10 @@
+.containerYesNo {
+  display: flex;
+  gap: 10px;
+  padding-top: 10px;
+  justify-content: center;
+}
+.btnYesNo {
+  width: 60px;
+  height: 30px;
+}
