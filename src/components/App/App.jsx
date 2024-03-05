@@ -2,7 +2,7 @@ import '../App/App.module.css'
 import { lazy, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
-import { RegistrictedRoute } from '../RegistrictedRoute/RegistrictedRoute';
+import { RestrictedRoute } from '../RestrictedRoute/RestrictedRoute';;
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../hooks';
 import { refreshUser } from '../../redux/auth/operations';
@@ -38,24 +38,22 @@ function App() {
       {/* <Suspense fallback={ <Loader/>}> */}
         <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<HomePage />} />
+          <Route index element={ <HomePage/>} />
+        </Route>
+        
+
+
           <Route path='/register' element={
-            <RegistrictedRoute redirectTo='contacts' component={<RegisterPage />}/>}></Route>
+            <RestrictedRoute redirectTo='contacts' component={<RegisterPage />}/>}></Route>
 
           <Route path='/login' element={
-            <RegistrictedRoute redirectTo='/contacts' component={<LoginPage />}/>
+            <RestrictedRoute redirectTo='/contacts' component={<LoginPage />}/>
             }></Route>
           
           <Route path='/contacts' element={ 
           <PrivateRoute redirectTo='/login'
           component={<ContactsPage/>}/>
           }></Route>
-
-        </Route>
-        
-
-
-          
       </Routes>
       <Toaster/>
       {/* </Suspense> */}
