@@ -10,7 +10,7 @@ export const NavBar = () => {
     return (
         <header className={css.containerNav}>
             <Navigation />
-            { isLoggedIn ? <UserMenu/> : <AuthNav/>}
+            { !isLoggedIn ? <UserMenu/> : <AuthNav/>}
        </header>
     )
 }
