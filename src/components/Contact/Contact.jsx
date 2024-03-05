@@ -15,7 +15,7 @@ export const Contact = ({ contact: { id, name, number } }) => {
     
     const onDeleteContact = (id) => {
         dispatch( deleteContacts(id));
-        dispatch(fetchContacts())
+      dispatch(fetchContacts());
         
     }
 
