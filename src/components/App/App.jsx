@@ -19,6 +19,7 @@ import {Layout} from '../Layout/Layout'
 //npm install react-loader-spinner
 // npm install react-helmet-async
 // npm install react-hot-toast
+//npm install --save react-modal
 
 
 const HomePage = lazy(() => import('../../pages/Home'));
